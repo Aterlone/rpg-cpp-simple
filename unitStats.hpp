@@ -16,7 +16,6 @@ public:
     int getHp();
     int getDmg();
 
-    void hit(int Dmg);
 };
 
 #endif
