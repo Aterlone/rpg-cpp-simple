@@ -1,11 +1,11 @@
 #include <iostream>
-#include "player_stats.hpp"
+#include "unitStats.hpp"
 
 using namespace std;
 
 int main()
 {
-    Stats player = Stats(50, 5);
+    UnitStats player = UnitStats(50, 5);
     player.hit(player.getDmg());
     cout << player.getHp() << player.getDmg() << "\n";
     return 0;
