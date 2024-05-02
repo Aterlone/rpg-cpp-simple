@@ -1,4 +1,4 @@
-#include "unitStats.hpp"
+#include "../characters/player.hpp"
 #include "combat.hpp"
 
 void Combat::hit(UnitStats &attacker, UnitStats &defender) 

@@ -4,6 +4,7 @@
 class Combat
 {
     public:
+        //For attacking, & is reference to location in register.
         void hit(UnitStats &attacker, UnitStats &defender);
 };
 
