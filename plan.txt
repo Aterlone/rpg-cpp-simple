@@ -1,0 +1,44 @@
+A text based rpg game:
+
+
+Story:
+
+Characters:
+    Player
+    Rat
+
+Player Actions:
+    Fight : CombatTypes
+    Shop : ShopItems
+    Nothing
+
+CombatTypes:
+    Punch: Deal damage equivelent to your punch status.
+
+    Block: Block the amout of damage equivelant to your block status. 
+    If it is greater than the status, then deal damage equal to the 
+    shield remaining.
+
+    Explode: Lose 75% of your hp
+
+ShopItems:
+    Base
+    Gear
+
+Upgrade Base:
+    Punch
+    Block
+    Explode    
+
+Buy Gear:
+    Glove
+    Wand of Ben
+    Trombone
+    Gloomifier
+
+General Game:
+    Enemies appear, and you fight them. If you beat them new enemy appears.
+    Can fight, or upgrade stuff in shop.
+
+    Once you reach 0hp you die and lose.
+    I don't know about win condition.

@@ -1,1 +1,0 @@
-g++ source/*.cpp source/**/*.cpp -o bin/output.exe
