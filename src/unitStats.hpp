@@ -9,15 +9,16 @@ struct UnitStats
 protected:
     int hp;
     int dmg;
+    std::string name;
 
 //giving perms to edit as necessary
 public:
-    UnitStats(int charHp, int charDmg);
+    UnitStats(int charHp, int charDmg, std::string Name);
 
     void setHp(int Hp);
     int getHp();
     int getDmg();
-    
+    std::string getName();
 
 };
 

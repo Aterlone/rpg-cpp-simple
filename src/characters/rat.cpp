@@ -1,3 +1,3 @@
 #include "rat.hpp"
 
-RatStats::RatStats() : UnitStats(20, 10) {};
+RatStats::RatStats() : UnitStats(20, 2, "Rat") {};

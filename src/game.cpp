@@ -1,5 +1,7 @@
 #include "characters/player.hpp"
 #include "characters/rat.hpp"
+#include "characters/golem.hpp"
+
 #include "actions/combat.hpp"
 #include "actions/turnStart.hpp"
 #include "unitStats.hpp"
@@ -7,6 +9,7 @@
 
 #include <string>
 #include <sstream>
+#include <random>
 
 using namespace std;
 
@@ -18,10 +21,10 @@ int Game::getEnemyHp() {enemy.getHp();}
 string Game::setAction(string &Action) 
 {
     action = Action;
-    return Game::turnStuff(action);
+    return Game::turnLogic(action);
 }
 
-string Game::turnStuff(string &Action)
+string Game::turnLogic(string &Action)
 {
     Combat combat = Combat();
 
@@ -51,8 +54,34 @@ string Game::turnDecide()
 string Game::displayStats() 
 {
     std::ostringstream oss; 
-    oss << "Player Hp: " << player.getHp() << "\nRat Hp: " << enemy.getHp() << "\n\n";
+    oss << "Player Hp: " << player.getHp() << "\n" << enemy.getName() << " Hp: " << enemy.getHp() << "\n\n";
     return oss.str();
 }
 
 string Game::isDead() {return "Game Over";}
+
+string Game::enemyDefeated()
+{
+    ostringstream oss;
+    oss << "Enemy Exterminated. " << enemy.getName() << " appeared. \n\n";
+    return oss.str();
+}
+
+void Game::genNewEnemy() 
+{
+    int number;
+    random_device rd; 
+    mt19937 gen(rd()); 
+    uniform_int_distribution<> distr(0, 3); 
+
+    number = distr(gen);
+
+    if(number == 1)
+    {
+        enemy = RatStats();
+    }
+    else
+    {
+        enemy = GolemStats();
+    }
+}

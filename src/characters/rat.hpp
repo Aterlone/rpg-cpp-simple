@@ -6,6 +6,7 @@ struct RatStats : UnitStats
 {
     public:
         RatStats();
+        
 };
 
 #endif

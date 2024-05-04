@@ -13,10 +13,13 @@ int main()
 
     //Move you take
     string action;
+    //If turn should be repeated or not because action is valid/invalid
     string repeat;
 
+    //if should exit out of loop.
     bool breaking = false;
 
+    //instance of all commands necessary.
     Game game = Game();
 
     //The game continues while below condition is true
@@ -45,12 +48,23 @@ int main()
                 cout << repeat;
             }
         }
-        //Enemy hits you.
 
         //Stats of both sides.
         cout << game.displayStats();
         breaking = false;
+
+        if (game.getPlayerHp() == 0 )
+        {
+            cout << game.isDead() << endl;
+            break;
+        }
+        if (game.getEnemyHp() == 0 )
+        {
+            //Add this to game.cpp later so you can have a lot more such as loot drops.
+            game.genNewEnemy();
+            cout << game.enemyDefeated();
+
+        }
     }
-    cout << game.isDead() << endl;
     return 0;
 }

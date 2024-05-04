@@ -10,7 +10,9 @@ Characters:
 Player Actions:
     Fight : CombatTypes
     Shop : ShopItems
+    DisplayStats
     Nothing
+    Exit Program
 
 CombatTypes:
     Punch: Deal damage equivelent to your punch status.

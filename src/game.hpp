@@ -26,12 +26,15 @@ class Game
 
         string setAction(string &Action);
 
-        string turnStuff(string &Action);
+        string turnLogic(string &Action);
 
         string turnDecide();
 
         string displayStats();
         string isDead();
+
+        string enemyDefeated();
+        void genNewEnemy();
 
 };
 
