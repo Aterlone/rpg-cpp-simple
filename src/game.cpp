@@ -1,87 +1,90 @@
-#include "characters/player.hpp"
-#include "characters/rat.hpp"
-#include "characters/golem.hpp"
-
-#include "actions/combat.hpp"
-#include "actions/turnStart.hpp"
-#include "unitStats.hpp"
-#include "game.hpp"
-
+#include <iostream>
+#include <fstream>
 #include <string>
-#include <sstream>
-#include <random>
+
+#include "game.hpp"
+#include "chars/chars.hpp"
 
 using namespace std;
 
-Game::Game() : player(PlayerStats()), enemy(RatStats()), action("1") {};
+Game::Game() : player(PlayerStats("R")), enemy(GardronStats()) {};
 
-int Game::getPlayerHp() {player.getHp();}
-int Game::getEnemyHp() {enemy.getHp();}
 
-string Game::setAction(string &Action) 
+void Game::play()
 {
-    action = Action;
-    return Game::turnLogic(action);
+    player = PlayerStats(getPlayerName());
+
+    while(player.getHp_C() > 0) takeTurn();    
 }
 
-string Game::turnLogic(string &Action)
+string Game::getPlayerName()
 {
-    Combat combat = Combat();
+    string name;
+    cout << "What do you want your name to be?\n";
+    cin >> name;
 
-    if (action == "1")
-    {
-        //action is fight so fighting stuff
-        //From combat.hpp is a hit action
-        combat.hit(player, enemy);
+    return name;
+}
 
-    }
-    else if (action == "2") {return displayStats();}
-    else if (action == "3") {}
-    else{
-        
-        return "Choose a valid action! \n\n";
-    }
+void Game::readFile(string filename)
+{
+    ifstream inputFile(filename);
+
+    if (!inputFile.is_open()) { 
+        cerr << "Error opening the file!" << endl; 
+    } 
     
-    combat.hit(enemy, player);
-    return "";
+    string line;
+
+    while (getline(inputFile, line)) { 
+        cout << line << endl; 
+    } 
+  
+    inputFile.close();
 }
 
-string Game::turnDecide()
+void Game::takeTurn()
 {
-    return "1. Fight \n2. Display Stats \n3. Nothing";
-}
+    readFile("C:/Users/Tane/rpg-cpp-simple/src/text/options.txt");
+    //option
+    string o;
+    cin >> o;
 
-string Game::displayStats() 
-{
-    std::ostringstream oss; 
-    oss << "Player Hp: " << player.getHp() << "\n" << enemy.getName() << " Hp: " << enemy.getHp() << "\n\n";
-    return oss.str();
-}
-
-string Game::isDead() {return "Game Over";}
-
-string Game::enemyDefeated()
-{
-    ostringstream oss;
-    oss << "Enemy Exterminated. " << enemy.getName() << " appeared. \n\n";
-    return oss.str();
-}
-
-void Game::genNewEnemy() 
-{
-    int number;
-    random_device rd; 
-    mt19937 gen(rd()); 
-    uniform_int_distribution<> distr(0, 3); 
-
-    number = distr(gen);
-
-    if(number == 1)
+    if (o == "1")
     {
-        enemy = RatStats();
+        fight(player, enemy);
+        fight(enemy, player);
+
+        getStatsAll();    
     }
-    else
-    {
-        enemy = GolemStats();
-    }
+    else if (o == "2") shop();
+    else if (o == "3") getStatsAll();
+    else if (o == "4") {fight(enemy, player); getStatsAll();}
+    else if (o == "5") end();
+    else cout << "Choose a valid option";
+}
+
+void Game::fight(UnitStats &attacker, UnitStats &defender)
+{
+    defender.setHp(defender.getHp_C() - attacker.getDmg());
+}
+void Game::shop()
+{
+    cout << "Nothing you can buy right now.";
+}
+void Game::getStats(UnitStats unit)
+{
+    cout << "=========" << unit.getName() << "'s Stats=========\n";
+    cout << "Name: " << unit.getName() << "\nHp: " << unit.getHp_C() << "/" << unit.getHp_M() << "\nDmg: " << unit.getDmg() << "\n";
+}
+void Game::end()
+{
+    cout << "Going to exit.\n";
+    exit(0);
+} 
+
+void Game::getStatsAll()
+{
+    getStats(player); 
+    getStats(enemy);
 }

@@ -1,0 +1,8 @@
+
+
+1. Fight
+2. Shop
+3. Check Stats
+4. Skip Turn
+5. End game
+

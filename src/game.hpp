@@ -1,42 +1,34 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "characters/player.hpp"
-#include "unitStats.hpp"
-
 #include <string>
+#include "chars/chars.hpp"
 
 using namespace std;
 
-class Game
+struct Game 
 {
     private:
-        PlayerStats player;
-
-        //Make array later so can have multiple enemies
+        UnitStats player;
         UnitStats enemy;
-
-        string action;
     public:
-        //Player is dead then returns gameover message. Otherwise don't.
         Game();
-                
-        int getPlayerHp();
-        int getEnemyHp();
 
-        string setAction(string &Action);
+        void play();
+        string getPlayerName();
 
-        string turnLogic(string &Action);
+        void readFile(string filename);
 
-        string turnDecide();
+        void takeTurn();
+        
+        void fight(UnitStats &attacker, UnitStats &defender);
+        void shop();
+        void getStats(UnitStats unit);
+        void end();
 
-        string displayStats();
-        string isDead();
+        void getStatsAll();
 
-        string enemyDefeated();
-        void genNewEnemy();
 
 };
-
 
 #endif
