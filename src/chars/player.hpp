@@ -6,7 +6,10 @@
 
 struct PlayerStats : public UnitStats
 {
-    PlayerStats(std::string Name);
+    private:
+        int income;
+    public:
+        PlayerStats(std::string Name);
 };
 
 #endif

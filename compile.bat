@@ -1,3 +1,3 @@
 @echo off
 echo Compiling...
-g++ src/*.cpp src/**/*.cpp -o bin/output.exe
+g++ src/*.cpp src/**/*.cpp src/**/**/*.cpp -o bin/output.exe

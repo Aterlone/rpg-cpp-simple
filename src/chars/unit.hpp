@@ -2,6 +2,7 @@
 #define UNIT_HPP
 
 #include <string>
+#include "../items/itemsGathered.hpp"
 
 struct UnitStats
 {
@@ -12,6 +13,9 @@ struct UnitStats
         // max hp
         int hp_m;
         int dmg;
+        //total dmg
+        int t_dmg;
+        WeaponStats weapon;
     public:
         UnitStats(std::string Name, int Hp, int Dmg);
 
@@ -21,6 +25,10 @@ struct UnitStats
 
         int getHp_M();
         int getDmg();
+        void setDmg();
+
+        void setWeapon(WeaponStats &Weapon);
+        
 };
 
 #endif

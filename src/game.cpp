@@ -4,6 +4,7 @@
 
 #include "game.hpp"
 #include "chars/chars.hpp"
+#include "items/itemsGathered.hpp"
 
 using namespace std;
 
@@ -57,8 +58,8 @@ void Game::takeTurn()
 
         getStatsAll();    
     }
-    else if (o == "2") shop();
-    else if (o == "3") getStatsAll();
+    else if(o == "2") shop();
+    else if(o == "3") getStats(player);
     else if (o == "4") {fight(enemy, player); getStatsAll();}
     else if (o == "5") end();
     else cout << "Choose a valid option";
@@ -70,7 +71,15 @@ void Game::fight(UnitStats &attacker, UnitStats &defender)
 }
 void Game::shop()
 {
-    cout << "Nothing you can buy right now.";
+    string optionWeapon;
+    cout << "1. Weapon";
+    cin >> optionWeapon;
+
+    if(optionWeapon == "1")
+    {
+        WeaponStats weapon = WeaponStats(3,"a","a");
+        player.setWeapon(weapon);
+    }
 }
 void Game::getStats(UnitStats unit)
 {
